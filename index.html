@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlgoFlow - Interactive DSA Simulator</title>
+  <meta name="description" content="A beginner-friendly, highly interactive visual simulator for learning Data Structures and Algorithms with step-by-step code tracing and real-world analogies.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>AlgoFlow</h1>
+          <span>DSA Simulator</span>
+        </div>
+      </div>
+      
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="sorting">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 3v18h18M7 16h3v-4H7v4zm6 0h3V9h-3v7zm6 0h3V5h-3v11Z"/>
+          </svg>
+          <span>Sorting Algorithms</span>
+        </button>
+        <button class="nav-item" data-tab="linear">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <span>Stack & Queue</span>
+        </button>
+        <button class="nav-item" data-tab="tree">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM12 12v10M12 12l-7 3M12 12l7 3"/>
+          </svg>
+          <span>Binary Search Tree</span>
+        </button>
+        <button class="nav-item" data-tab="graph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="5" r="3"/>
+            <circle cx="5" cy="19" r="3"/>
+            <circle cx="19" cy="19" r="3"/>
+            <path d="M5 16l5-8M19 16l-5-8M8 19h8"/>
+          </svg>
+          <span>Pathfinding (BFS/DFS)</span>
+        </button>
+        <button class="nav-item" data-tab="leetcode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+            <path d="M14.25 7.5L9 12l5.25 4.5"/>
+          </svg>
+          <span>LeetCode Solver</span>
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <p>Learn with interactive visuals</p>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top header / Context Bar -->
+      <header class="content-header">
+        <div class="title-section">
+          <h2 id="current-title">Sorting Algorithms</h2>
+          <p id="current-desc">Visualizing how elements are rearranged in a specific order.</p>
+        </div>
+        <div class="stats-container">
+          <div class="stat-badge">
+            <span class="label">Time Complexity</span>
+            <span class="value" id="time-complexity">O(n²)</span>
+          </div>
+          <div class="stat-badge">
+            <span class="label">Space Complexity</span>
+            <span class="value" id="space-complexity">O(1)</span>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Visualizer Workspace & Control Grid -->
+      <div class="workspace-grid">
+        
+        <!-- VISUALIZER CANVAS CARD -->
+        <section class="card visualizer-card">
+          <div class="card-header">
+            <h3>Visualization Area</h3>
+            <div class="visualizer-status" id="visualizer-status">Ready</div>
+          </div>
+          <div class="visualizer-viewport" id="visualizer-viewport">
+            <!-- Active visualizers are dynamically injected here -->
+          </div>
+        </section>
+        
+        <!-- SIDEBAR CONTROLS & TRACER -->
+        <div class="controls-column">
+          
+          <!-- CONTROL PANEL CARD -->
+          <section class="card control-card">
+            <div class="card-header">
+              <h3>Controls</h3>
+            </div>
+            <div class="control-panel">
+              <!-- Controls are dynamically swapped based on selection -->
+              <div id="controls-sorting" class="control-group active">
+                <div class="control-row">
+                  <label for="sort-select">Algorithm:</label>
+                  <select id="sort-select" class="styled-select">
+                    <option value="bubble">Bubble Sort</option>
+                    <option value="selection">Selection Sort</option>
+                    <option value="insertion">Insertion Sort</option>
+                  </select>
+                </div>
+                <div class="control-row buttons">
+                  <button id="btn-sort-start" class="btn primary-btn">Sort</button>
+                  <button id="btn-sort-reset" class="btn secondary-btn">Generate Array</button>
+                </div>
+              </div>
+              
+              <div id="controls-linear" class="control-group">
+                <div class="control-row">
+                  <label for="linear-type">Select Structure:</label>
+                  <select id="linear-type" class="styled-select">
+                    <option value="stack">Stack (LIFO)</option>
+                    <option value="queue">Queue (FIFO)</option>
+                  </select>
+                </div>
+                <div class="control-row inputs">
+                  <input type="number" id="linear-input" placeholder="Value (e.g. 42)" min="1" max="99" class="styled-input">
+                  <button id="btn-linear-push" class="btn primary-btn">Push / Enqueue</button>
+                  <button id="btn-linear-pop" class="btn warning-btn">Pop / Dequeue</button>
+                  <button id="btn-linear-clear" class="btn secondary-btn">Clear</button>
+                </div>
+              </div>
+              
+              <div id="controls-tree" class="control-group">
+                <div class="control-row inputs">
+                  <input type="number" id="tree-input" placeholder="Node Value" min="1" max="99" class="styled-input">
+                  <button id="btn-tree-insert" class="btn primary-btn">Insert</button>
+                  <button id="btn-tree-search" class="btn accent-btn">Search</button>
+                  <button id="btn-tree-clear" class="btn secondary-btn">Clear Tree</button>
+                </div>
+              </div>
+              
+              <div id="controls-graph" class="control-group">
+                <div class="control-row">
+                  <label for="graph-algo">Algorithm:</label>
+                  <select id="graph-algo" class="styled-select">
+                    <option value="bfs">Breadth-First Search (BFS)</option>
+                    <option value="dfs">Depth-First Search (DFS)</option>
+                  </select>
+                </div>
+                <div class="control-row info-row">
+                  <p class="hint-text">Click and drag on grid to draw walls. Drag green (Start) and red (End) nodes.</p>
+                </div>
+                <div class="control-row buttons">
+                  <button id="btn-graph-start" class="btn primary-btn">Find Path</button>
+                  <button id="btn-graph-clear-walls" class="btn secondary-btn">Clear Walls</button>
+                  <button id="btn-graph-reset" class="btn secondary-btn">Reset Grid</button>
+                </div>
+              </div>
+              
+              <div id="controls-leetcode" class="control-group">
+                <div class="control-row">
+                  <label for="leetcode-select">Select Problem:</label>
+                  <select id="leetcode-select" class="styled-select">
+                    <option value="lc206">LeetCode 206: Reverse Linked List</option>
+                    <option value="lc20">LeetCode 20: Valid Parentheses</option>
+                  </select>
+                </div>
+                <div class="control-row inputs" id="leetcode-input-row" style="display: none;">
+                  <label for="leetcode-input">Custom Brackets:</label>
+                  <input type="text" id="leetcode-input" value="()[]{}" class="styled-input" placeholder="e.g. ()[]{}">
+                </div>
+                <div class="control-row buttons">
+                  <button id="btn-leetcode-start" class="btn primary-btn">Run Simulation</button>
+                  <button id="btn-leetcode-reset" class="btn secondary-btn" id="btn-leetcode-reset">Reset Simulation</button>
+                </div>
+              </div>
+              
+              <!-- Global Controls: Speed Slider -->
+              <div class="global-controls">
+                <div class="control-row speed-row">
+                  <label for="speed-slider">Speed:</label>
+                  <input type="range" id="speed-slider" min="50" max="1000" value="400" step="50">
+                  <span id="speed-value">400ms</span>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- CODE TRACER CARD -->
+          <section class="card tracer-card">
+            <div class="card-header">
+              <h3>Code Execution Tracer</h3>
+            </div>
+            <div class="tracer-viewport">
+              <pre id="code-container"><code class="fira-code"></code></pre>
+            </div>
+          </section>
+          
+        </div>
+      </div>
+      
+      <!-- Educational Explanation Panel -->
+      <section class="card explanation-card">
+        <div class="card-header">
+          <h3>Mental Model & Analogy</h3>
+        </div>
+        <div class="explanation-content" id="explanation-content">
+          <!-- Dynamically loaded beginner-friendly explanations -->
+        </div>
+      </section>
+      
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
