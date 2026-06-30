@@ -2,32 +2,6 @@
 
 Welcome to **AlgoFlow**, an interactive, beginner-friendly simulator designed to help you learn and prepare for Data Structures and Algorithms (DSA). 
 
-This project combines a highly visual, animated dashboard with a custom workspace agent skill (`dsa-coach`) to guide you through coding interviews and visual mental models.
-
----
-
-## 🚀 Key Visualizer Features
-
-AlgoFlow provides dedicated, interactive panels to visualize algorithms step-by-step:
-
-### 1. LeetCode Solver
-* **Reverse Linked List (LeetCode 206)**: Animates `prev`, `curr`, and `next` pointer labels moving down a list, while dynamically turning arrow directions.
-* **Valid Parentheses (LeetCode 20)**: Scans a string of brackets and pushes opening brackets onto a helper stack tube. Shows match evaluations, error shakes, and stack removals. Supports custom user-defined bracket strings!
-
-### 2. Sorting Algorithms
-* Visualizes Bubble Sort, Selection Sort, and Insertion Sort.
-* Uses vertical bar elements where active selections turn yellow, swaps turn pink/magenta, and fully sorted indexes turn emerald green.
-
-### 3. Stack & Queue (Linear DS)
-* Visualizes LIFO (Last In First Out) vs FIFO (First In First Out) queue properties using interactive container tubes.
-
-### 4. Binary Search Tree (BST)
-* Recursively computes tree layouts and draws SVG branches connecting parent and child nodes. Highlight elements and traverse path directions on inserts or searches.
-
-### 5. Pathfinding (Graphs)
-* Uses a $15 \times 15$ grid. Click and drag to create walls, drag Start (**S**) or End (**E**) nodes, and run Breadth-First Search (BFS) or Depth-First Search (DFS) animations.
-
----
 
 ## 📂 Repository Structure
 
